@@ -1,9 +1,8 @@
-FROM java:8u111-jre-alpine
+FROM library/java
 
 WORKDIR /home/apps/
+ADD target/csespringmvc-0.0.1-SNAPSHOT.jar .
 
-COPY target/*.jar app.jar
+ADD start.sh .
 
-RUN sh -c 'touch app.jar'
-
-ENTRYPOINT [ "sh", "-c", "java -Djava.security.egd=file:/dev/./urandom -jar app.jar" ]
+ENTRYPOINT ["sh", "/home/apps/start.sh"]
